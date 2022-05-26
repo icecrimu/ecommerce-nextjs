@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -9,10 +9,15 @@ import { client, urlFor } from '../../lib/client'
 import { Product } from '../../components'
 import { useStateContext } from '../../context/StateContext'
 
-export default function ProductDetails({ product, products }) {
+export default function ProductDetails({ product, products, slug }) {
+  useEffect(() => {
+    setQty(1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug])
+
   const [index, setIndex] = useState(0)
 
-  const { incQty, decQty, qty, onAdd } = useStateContext()
+  const { incQty, decQty, qty, setQty, onAdd } = useStateContext()
 
   const { image, name, details, price } = product
 
@@ -108,7 +113,8 @@ export const getStaticProps = async ({ params: { slug } }) => {
   return {
     props: {
       product,
-      products
+      products,
+      slug
     }
   }
 }
