@@ -103,7 +103,10 @@ export function StateContext({ children }) {
         setQty,
         onAdd,
         onRemove,
-        toggleCartItemQuantity
+        toggleCartItemQuantity,
+        setCartItems,
+        setTotalPrice,
+        setTotalQuantities
       }}
     >
       {children}
